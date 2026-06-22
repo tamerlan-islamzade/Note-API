@@ -45,4 +45,4 @@
    uvicorn main:app --reload
 ```
 
-5. Visit the docs at `http://localhost:8000/docs`
+5. Visit the docs at `http://localhost:8000/docs`# Note-API
