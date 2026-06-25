@@ -1,39 +1,28 @@
 # Notes API
 
+A RESTful API for sharing and managing personal notes, built with FastAPI and PostgreSQL.
+Users can register, authenticate, and perform full CRUD operations on their own notes.
+
+## Tech Stack
+FastAPI · PostgreSQL · SQLAlchemy · Pydantic · JWT · bcrypt · pytest
+
 ## Features
 - JWT authentication
 - Password hashing with bcrypt
-- Async database operations with SQLAlchemy
-- Data validation with Pydantic
+- Async database operations
+- Data validation with custom validators
+- Unit tests with pytest
 
-## Tech Stack
-- **FastAPI** — web framework
-- **PostgreSQL** — database
-- **SQLAlchemy** — async ORM
-- **Pydantic** — schema validation
-- **JWT** — authentication
+## Installation
 
-## Getting Started
-
-### Requirements
-- Python 3.11+
-- PostgreSQL
-
-### Installation
-1. Clone the repository
+1. Clone and install
 ```bash
    git clone https://github.com/tamerlan-islamzade/Note-API.git
    cd Note-API
-```
-
-2. Create a virtual environment and install dependencies
-```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
    pip install -r requirements.txt
 ```
 
-3. Create a `.env` file in the root directory
+2. Create `.env`
 ```env
    DATABASE_URL=postgresql+asyncpg://user:password@localhost/dbname
    SECRET_KEY=your_secret_key
@@ -41,9 +30,14 @@
    ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 
-4. Run the application
+3. Run
 ```bash
    uvicorn main:app --reload
 ```
 
-5. Visit the docs at `http://localhost:8000/docs`# Note-API
+Docs available at `http://localhost:8000/docs`
+
+## Tests
+```bash
+pytest -v
+```# Note-API-private
