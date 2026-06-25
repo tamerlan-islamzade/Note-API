@@ -1,6 +1,8 @@
 fastapi==0.138.0
+httpx==0.28.1
 pydantic==2.13.4
 pydantic_settings==2.14.2
 PyJWT==2.13.0
+pytest==9.1.1
 python_bcrypt==0.3.2
 SQLAlchemy==2.0.51

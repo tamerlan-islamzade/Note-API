@@ -1,3 +1,5 @@
+
+
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import SQLAlchemyError
@@ -7,9 +9,9 @@ from app.schema import Notes
 
 class CrudNote:
     #All database operations for Note model
-    async def getAll(cls,db:AsyncSession):
+    async def getAll(cls,db:AsyncSession,offset:int=0,limit:int=10):
         #Get all Notes
-        query=select(Note)
+        query=select(Note).offset(offset).limit(limit)
         result = await db.execute(query)
         return result.scalars().all()
     

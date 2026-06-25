@@ -10,9 +10,10 @@ from app.models.User import User
 router=APIRouter(prefix="/notes",tags=["Notes"])
 
 @router.get("/",response_model=list[Notes.NoteResponse])
-async def getAll(db:AsyncSession=Depends(get_db)):
+async def getAll(page:int=1,limit:int=10,db:AsyncSession=Depends(get_db)):
+    offset=(page-1)*limit
     #get all Notes from database
-    return await CrudNote().getAll(db=db)
+    return await CrudNote().getAll(db=db,limit=limit,offset=offset)
 
 @router.get("/{note_id}",response_model=Notes.NoteResponse)
 async def getById(note_id:int,db:AsyncSession=Depends(get_db)):
