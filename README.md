@@ -40,4 +40,3 @@ Docs available at `http://localhost:8000/docs`
 ## Tests
 ```bash
 pytest -v
-```# Note-API-private

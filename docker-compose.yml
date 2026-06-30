@@ -25,6 +25,9 @@ services:
     environment:
       # Baza ilə əlaqə linki. "db" bəhs etdiyimiz yuxarıdakı servisin adıdır
       - DATABASE_URL=postgresql+asyncpg://myuser:mypassword@db:5432/mydatabase
+      - SECRET_KEY=${SECRET_KEY:-super_secret_fallback_key}
+      - ALGORITHM=${ALGORITHM:-HS256}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
     depends_on:
       - db
 
