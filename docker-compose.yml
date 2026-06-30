@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # 1. Verilənlər Bazası Servisi (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. Sənin Backend App Servisin
+  web:
+    build: .
+    container_name: backend_app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      # Baza ilə əlaqə linki. "db" bəhs etdiyimiz yuxarıdakı servisin adıdır
+      - DATABASE_URL=postgresql+asyncpg://myuser:mypassword@db:5432/mydatabase
+    depends_on:
+      - db
+
+volumes:
+  postgres_data: # Konteyner silinsə belə bazadakı məlumatların itməməsi üçün volume

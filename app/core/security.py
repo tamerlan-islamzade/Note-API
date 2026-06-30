@@ -1,26 +1,20 @@
-import bcrypt
+from passlib.context import CryptContext
 from datetime import datetime , timezone , timedelta
 import jwt
 
 from app.schema.Auth  import TokenData
 from app.core.config import settings
 
+pwd_context=CryptContext(schemes=["bcrypt"])
 def hash_password(password:str)->str:
     #Hash a plain-text password using bcrypt
-    bytes=password.encode("utf-8")
+    clean_password=str(password).strip()
+    return pwd_context.hash(clean_password)
 
-    salt=bcrypt.gensalt()
-    hashed_bytes=bcrypt.hashpw(bytes,salt)
-    return hashed_bytes.decode("utf-8")
 
 def verify_password(plain_password:str,hashed_password:str)->bool:
     #Verify a plain-text password against a bcrypt hash
-    try:
-        plain_bytes=plain_password.encode("utf-8")
-        hashed_bytes=hashed_password.encode("utf-8")
-        return bcrypt.checkpw(plain_bytes,hashed_bytes)
-    except Exception:
-        return False
+    return pwd_context.verify(plain_password,hashed_password)
 
 def create_access_token(token_data:TokenData):
     #generate a signed jwt access token from the given data
