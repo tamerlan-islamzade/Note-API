@@ -4,7 +4,7 @@ A RESTful API for sharing and managing personal notes, built with FastAPI and Po
 Users can register, authenticate, and perform full CRUD operations on their own notes.
 
 ## Tech Stack
-FastAPI · PostgreSQL · SQLAlchemy · Pydantic · JWT · bcrypt · pytest
+FastAPI · PostgreSQL · SQLAlchemy · Pydantic · JWT · passlib · pytest · Docker
 
 ## Features
 - JWT authentication
@@ -14,6 +14,8 @@ FastAPI · PostgreSQL · SQLAlchemy · Pydantic · JWT · bcrypt · pytest
 - Unit tests with pytest
 
 ## Installation
+
+### Without Docker
 
 1. Clone and install
 ```bash
@@ -35,8 +37,24 @@ FastAPI · PostgreSQL · SQLAlchemy · Pydantic · JWT · bcrypt · pytest
    uvicorn main:app --reload
 ```
 
+### With Docker
+
+1. Create `.env`
+```env
+   DATABASE_URL=postgresql+asyncpg://user:password@db/dbname
+   SECRET_KEY=your_secret_key
+   ALGORITHM=HS256
+   ACCESS_TOKEN_EXPIRE_MINUTES=30
+```
+
+2. Run
+```bash
+   docker-compose up --build
+```
+
 Docs available at `http://localhost:8000/docs`
 
 ## Tests
 ```bash
 pytest -v
+```
